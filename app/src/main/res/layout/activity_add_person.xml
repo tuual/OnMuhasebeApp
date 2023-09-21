@@ -92,15 +92,13 @@
 
 
     <Button
-        android:id="@+id/btnUpdate"
+        android:id="@+id/btnAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Kişiyi Güncelle"
+        android:text="Kişiyi Ekle"
         app:icon="@drawable/person_add"
-        android:padding="15dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textField2"
         app:layout_constraintHorizontal_bias="0.0"
@@ -109,58 +107,58 @@
         app:layout_constraintVertical_bias="0.167" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/baseline_add_box_24"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/baseline_add_box_24"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/person_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/add"
-        app:layout_constraintEnd_toEndOf="@+id/add"
-        app:layout_constraintStart_toStartOf="@+id/add"
-        app:srcCompat="@drawable/format_list" />
-
-
-    <TextView
-        android:id="@+id/personListText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="Kişileri Listele"
-        app:layout_constraintBottom_toBottomOf="@+id/person_list"
-        app:layout_constraintEnd_toStartOf="@+id/person_list"
-        app:layout_constraintTop_toTopOf="@+id/person_list" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/person_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toTopOf="@+id/add"
+            app:layout_constraintEnd_toEndOf="@+id/add"
+            app:layout_constraintStart_toStartOf="@+id/add"
+            app:srcCompat="@drawable/format_list" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_person"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/person_list"
-        app:layout_constraintEnd_toEndOf="@+id/person_list"
-        app:layout_constraintStart_toStartOf="@+id/person_list"
-        app:srcCompat="@drawable/person_add" />
+        <TextView
+            android:id="@+id/personListText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Kişileri Listele"
+            app:layout_constraintBottom_toBottomOf="@+id/person_list"
+            app:layout_constraintEnd_toStartOf="@+id/person_list"
+            app:layout_constraintTop_toTopOf="@+id/person_list" />
 
-    <TextView
-        android:id="@+id/addPersonText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="Kişi Ekle"
-        app:layout_constraintBottom_toBottomOf="@+id/add_person"
-        app:layout_constraintEnd_toStartOf="@+id/add_person"
-        app:layout_constraintTop_toTopOf="@+id/add_person" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toTopOf="@+id/person_list"
+            app:layout_constraintEnd_toEndOf="@+id/person_list"
+            app:layout_constraintStart_toStartOf="@+id/person_list"
+            app:srcCompat="@drawable/person_add" />
+
+        <TextView
+            android:id="@+id/addPersonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Kişi Ekle"
+            app:layout_constraintBottom_toBottomOf="@+id/add_person"
+            app:layout_constraintEnd_toStartOf="@+id/add_person"
+            app:layout_constraintTop_toTopOf="@+id/add_person" />
+    </androidx.constraintlayout.widget.ConstraintLayout>

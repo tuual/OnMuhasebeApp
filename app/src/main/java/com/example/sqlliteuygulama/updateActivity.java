@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.sqlliteuygulama.databinding.ActivityUpdateBinding;
@@ -19,6 +20,7 @@ public class updateActivity extends AppCompatActivity {
     private ConnectionHelper dbHelper;
 
     private String id;
+    Boolean actionButtonVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,44 @@ public class updateActivity extends AppCompatActivity {
 
         GelenVeriler();
 
-        binding.button2.setOnClickListener(view -> {
+
+        binding.personList.setVisibility(View.GONE);
+        binding.addPerson.setVisibility(View.GONE);
+        binding.personListText.setVisibility(View.GONE);
+        binding.addPersonText.setVisibility(View.GONE);
+        actionButtonVisible = false;
+
+        binding.add.setOnClickListener(view -> {
+            if (!actionButtonVisible){
+                binding.personList.show();
+                binding.addPerson.show();
+                binding.personListText.setVisibility(View.VISIBLE);
+                binding.addPersonText.setVisibility(View.VISIBLE);
+                actionButtonVisible = true;
+
+            }
+            else{
+                binding.personList.hide();
+                binding.addPerson.hide();
+                binding.personListText.setVisibility(View.GONE);
+                binding.addPersonText.setVisibility(View.GONE);
+                actionButtonVisible = false;
+
+            }
+
+        });
+
+        binding.addPerson.setOnClickListener(view -> {
+            Intent intent = new Intent(this,addPersonActivity.class);
+            startActivity(intent);
+            finish();
+        });
+        binding.personList.setOnClickListener(view -> {
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
             finish();
         });
-        binding.button.setOnClickListener(view -> {
+        binding.btnUpdate.setOnClickListener(view -> {
             try {
                 dataUpdate();
             } catch (SQLException e) {

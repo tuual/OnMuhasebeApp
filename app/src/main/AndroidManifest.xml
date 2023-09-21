@@ -16,6 +16,12 @@
         android:theme="@style/Theme.SqlLiteUygulama"
         tools:targetApi="31">
         <activity
+            android:name=".listPersonActivitiy"
+            android:exported="false" />
+        <activity
+            android:name=".addPersonActivity"
+            android:exported="false" />
+        <activity
             android:name=".updateActivity"
             android:exported="false" />
         <activity

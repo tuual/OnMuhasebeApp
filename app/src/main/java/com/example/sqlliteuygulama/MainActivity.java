@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     SimpleAdapter adapter;
     int sayac = 0;
     private String kullaniciAdi,sifre,email,id;
+    Boolean actionButtonVisible;
+
 
 
 
@@ -44,12 +46,49 @@ public class MainActivity extends AppCompatActivity {
         listModel = new listModel(MainActivity.this);
 
 
-        binding.button.setOnClickListener(view -> {
-            VeriEkleme();
+        VeriOkuma();
+        binding.personList.setVisibility(View.GONE);
+        binding.addPerson.setVisibility(View.GONE);
+        binding.personListText.setVisibility(View.GONE);
+        binding.addPersonText.setVisibility(View.GONE);
+        actionButtonVisible = false;
+
+        binding.add.setOnClickListener(view -> {
+            if (!actionButtonVisible){
+                binding.personList.show();
+                binding.addPerson.show();
+                binding.personListText.setVisibility(View.VISIBLE);
+                binding.addPersonText.setVisibility(View.VISIBLE);
+                actionButtonVisible = true;
+
+            }
+            else{
+                binding.personList.hide();
+                binding.addPerson.hide();
+                binding.personListText.setVisibility(View.GONE);
+                binding.addPersonText.setVisibility(View.GONE);
+                actionButtonVisible = false;
+
+            }
+
         });
+
+
+        binding.addPerson.setOnClickListener(view -> {
+            Intent intent = new Intent(this,addPersonActivity.class);
+            startActivity(intent);
+            finish();
+        });
+        binding.personList.setOnClickListener(view -> {
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
         binding.buttonID.setOnClickListener(view -> {
             VeriOkuma();
         });
+
 
 
         binding.listview1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -60,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 kullaniciAdi = veriler.get(i).get("KullaniciAdi");
                 sifre = veriler.get(i).get("Sifre");
                 email = veriler.get(i).get("Email");
+
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Veri Silme");
@@ -87,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 List<Map<String, String>> veriler = listModel.getList();
@@ -132,40 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void VeriEkleme() {
-
-        try {
-            if (!binding.etkullaniciadi.getText().toString().matches("") && !binding.etsifre.getText().toString().matches("") && !binding.etemail.getText().toString().matches("")) {
-                String query = "INSERT INTO kullanicilar (kullaniciAdi, sifre, email) VALUES ( '"
-                        + binding.etkullaniciadi.getText().toString() + "','"
-                        + binding.etsifre.getText().toString() + "','"
-                        + binding.etemail.getText().toString() + "')";
-                Toast.makeText(this, "Kayıt Oluşturuldu", Toast.LENGTH_SHORT).show();
-
-                dbHelper.execSQL(query, MainActivity.this);
-                binding.etemail.setText(null);
-                binding.etsifre.setText(null);
-                binding.etkullaniciadi.setText(null);
-                if (sayac == 1) {
-                    VeriOkuma();
-                }
-                else {
-
-                }
-
-            }
-            else{
-                binding.etkullaniciadi.setError("Boş Geçilemez");
-                binding.etemail.setError("Boş Geçilemez");
-                binding.etsifre.setError("Boş Geçilemez");
-
-            }
-
-        } catch (Exception se) {
-            Toast.makeText(this, se.getMessage(), Toast.LENGTH_SHORT).show();
-        }
 
 
-    }
 
 }
