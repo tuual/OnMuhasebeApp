@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     int sayac = 0;
     private String kullaniciAdi,sifre,email,id;
     Boolean actionButtonVisible;
+    private ImageView imageView;
 
 
 
@@ -54,15 +56,14 @@ public class MainActivity extends AppCompatActivity {
         actionButtonVisible = false;
 
         binding.add.setOnClickListener(view -> {
-            if (!actionButtonVisible){
+            if (!actionButtonVisible) {
                 binding.personList.show();
                 binding.addPerson.show();
                 binding.personListText.setVisibility(View.VISIBLE);
                 binding.addPersonText.setVisibility(View.VISIBLE);
                 actionButtonVisible = true;
 
-            }
-            else{
+            } else {
                 binding.personList.hide();
                 binding.addPerson.hide();
                 binding.personListText.setVisibility(View.GONE);
@@ -75,12 +76,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         binding.addPerson.setOnClickListener(view -> {
-            Intent intent = new Intent(this,addPersonActivity.class);
+            Intent intent = new Intent(this, addPersonActivity.class);
             startActivity(intent);
             finish();
         });
         binding.personList.setOnClickListener(view -> {
-            Intent intent = new Intent(this,MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
         });
@@ -91,42 +92,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        binding.listview1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                List<Map<String, String>> veriler = listModel.getList();
-                id = veriler.get(i).get("ID");
-                kullaniciAdi = veriler.get(i).get("KullaniciAdi");
-                sifre = veriler.get(i).get("Sifre");
-                email = veriler.get(i).get("Email");
-
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Veri Silme");
-                builder.setMessage("Bilgileri " + "\n" + "Kullanıcı Adı:" + " " + kullaniciAdi + "\n" + "Şifre:" + " " + sifre + " \n" + "Email:" + " " + email + "\n " + "Olan Bilgileri Silmek İstiyor musunuz ?");                builder.setNegativeButton("Hayır", null);
-                builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        String query = "DELETE FROM kullanicilar WHERE ID="+id;
-
-                        try {
-                            dbHelper.execSQL(query,MainActivity.this);
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-
-
-                        Toast.makeText(MainActivity.this, "Kayıt Silindi", Toast.LENGTH_SHORT).show();
-                        VeriOkuma();
-                    }
-                });
-                builder.show();
-                return false;
-            }
-        });
 
         binding.listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -136,29 +104,40 @@ public class MainActivity extends AppCompatActivity {
                 sifre = veriler.get(i).get("Sifre");
                 email = veriler.get(i).get("Email");
 
+                imageView = (ImageView) findViewById(R.id.listDelete);
+                imageView.setOnClickListener(view1 -> {
+                            VeriSilme(i);
+                        });
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Veri Güncellemesi");
                 builder.setMessage("Bu Veriyi Güncellemek İstiyor musunuz ?");
-                builder.setNegativeButton("Hayır",null);
+                builder.setNegativeButton("Hayır", null);
                 builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(getApplicationContext(),updateActivity.class);
-                        intent.putExtra("kAdi",kullaniciAdi);
-                        intent.putExtra("id",id);
-                        intent.putExtra("kSifre",sifre);
-                        intent.putExtra("kEmail",email);
+                        Intent intent = new Intent(getApplicationContext(), updateActivity.class);
+                        intent.putExtra("kAdi", kullaniciAdi);
+                        intent.putExtra("id", id);
+                        intent.putExtra("kSifre", sifre);
+                        intent.putExtra("kEmail", email);
                         startActivity(intent);
 
 
-
                     }
-                });
-             builder.show();
+                });builder.show();
+
+
+
             }
+
         });
+
+
+
+
     }
+
 
     public void VeriOkuma(){
         List<Map<String,String>> VeriListesi;
@@ -174,6 +153,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void VeriSilme(int position) {
+        List<Map<String, String>> veriler = listModel.getList();
+        id = veriler.get(position).get("ID");
+        kullaniciAdi = veriler.get(position).get("KullaniciAdi");
+        sifre = veriler.get(position).get("Sifre");
+        email = veriler.get(position).get("Email");
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Veri Silme");
+        builder.setMessage("Veriyi Silmek İstiyor musunuz ?");
+        builder.setNegativeButton("Hayır", null);
+        builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String query = "DELETE FROM kullanicilar WHERE ID=" + id;
+
+                try {
+                    dbHelper.execSQL(query, MainActivity.this);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Toast.makeText(MainActivity.this, "Kayıt Silindi", Toast.LENGTH_SHORT).show();
+                VeriOkuma();
+            }
+        });
+        builder.show();
+    }
 
 }

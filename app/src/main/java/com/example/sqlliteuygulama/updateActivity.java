@@ -16,10 +16,10 @@ import java.sql.SQLException;
 public class updateActivity extends AppCompatActivity {
 
     private ActivityUpdateBinding binding;
-    private String kadi,ksifre,kemail,etKadi,etSifre,etEmail;
+    private String kadi,ksifre,kemail,etKadi,etSifre,etEmail,id;
     private ConnectionHelper dbHelper;
 
-    private String id;
+
     Boolean actionButtonVisible;
 
     @Override
@@ -88,12 +88,20 @@ public class updateActivity extends AppCompatActivity {
         try {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
-
-            String query = "UPDATE kullanicilar SET kullaniciAdi = '" + etKadi + "',sifre = '" + etSifre + "',email = '" + etEmail + "' WHERE ID = " + id;
-            dbHelper.execSQL(query,getApplicationContext());
-            db.close();
-            Toast.makeText(this, "Güncelleme Başarılı", Toast.LENGTH_SHORT).show();
-
+            if (!etEmail.isEmpty() && !etKadi.isEmpty() && !etSifre.isEmpty()){
+                String query = "UPDATE kullanicilar SET kullaniciAdi = '" + etKadi + "',sifre = '" + etSifre + "',email = '" + etEmail + "' WHERE ID = " + id;
+                dbHelper.execSQL(query,getApplicationContext());
+                db.close();
+                Toast.makeText(this, "Güncelleme Başarılı", Toast.LENGTH_SHORT).show();
+                binding.etemail.setText(null);
+                binding.etsifre.setText(null);
+                binding.etkullaniciadi.setText(null);
+            }
+            else{
+                binding.etkullaniciadi.setError("Boş Geçilemez");
+                binding.etemail.setError("Boş Geçilemez");
+                binding.etsifre.setError("Boş Geçilemez");
+            }
 
         } catch (android.database.SQLException ex){
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
