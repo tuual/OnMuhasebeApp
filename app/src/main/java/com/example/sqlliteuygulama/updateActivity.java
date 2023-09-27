@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
@@ -88,19 +89,26 @@ public class updateActivity extends AppCompatActivity {
         try {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
-            if (!etEmail.isEmpty() && !etKadi.isEmpty() && !etSifre.isEmpty()){
-                String query = "UPDATE kullanicilar SET kullaniciAdi = '" + etKadi + "',sifre = '" + etSifre + "',email = '" + etEmail + "' WHERE ID = " + id;
-                dbHelper.execSQL(query,getApplicationContext());
-                db.close();
-                Toast.makeText(this, "Güncelleme Başarılı", Toast.LENGTH_SHORT).show();
-                binding.etemail.setText(null);
-                binding.etsifre.setText(null);
-                binding.etkullaniciadi.setText(null);
+            String emailValue = binding.etemail.getText().toString();
+            if (!emailValue.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailValue).matches()) {
+                if (!etEmail.isEmpty() && !etKadi.isEmpty() && !etSifre.isEmpty()) {
+
+                    String query = "UPDATE kullanicilar SET kullaniciAdi = '" + etKadi + "',sifre = '" + etSifre + "',email = '" + etEmail + "' WHERE ID = " + id;
+                    dbHelper.execSQL(query, getApplicationContext());
+                    db.close();
+                    Toast.makeText(this, "Güncelleme Başarılı", Toast.LENGTH_SHORT).show();
+                    binding.etemail.setText(null);
+                    binding.etsifre.setText(null);
+                    binding.etkullaniciadi.setText(null);
+                }
+                else{
+                    binding.etkullaniciadi.setError("Boş Geçilemez");
+                    binding.etemail.setError("Boş Geçilemez");
+                    binding.etsifre.setError("Boş Geçilemez");
+                }
             }
-            else{
-                binding.etkullaniciadi.setError("Boş Geçilemez");
-                binding.etemail.setError("Boş Geçilemez");
-                binding.etsifre.setError("Boş Geçilemez");
+             else{
+                Toast.makeText(this, "Geçerli Bir Mail Adresi Giriniz", Toast.LENGTH_SHORT).show();
             }
 
         } catch (android.database.SQLException ex){
