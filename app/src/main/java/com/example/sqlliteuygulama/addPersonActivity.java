@@ -82,7 +82,7 @@ public class addPersonActivity extends AppCompatActivity {
             if (!etKadi.matches("") && !binding.etsifre.getText().toString().matches("") && !binding.etemail.getText().toString().matches("")) {
                 emailValue = binding.etemail.getText().toString();
                 if (!emailValue.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailValue).matches()) {
-                    String query = "INSERT INTO kullanicilar (kullaniciAdi, sifre, email) VALUES ( '"
+                    String query = "INSERT INTO tblUser (sirketAdi, sifre, email) VALUES ( '"
                             + binding.etkullaniciadi.getText().toString() + "','"
                             + binding.etsifre.getText().toString() + "','"
                             + binding.etemail.getText().toString() + "')";

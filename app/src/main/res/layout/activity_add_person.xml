@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Kayıt Oluşturma"
+            android:text="@string/sirketKayit"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/textColor" />
 
@@ -37,8 +37,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/sirketAdi"
         android:layout_margin="15dp"
-        android:hint="Kullanıcı Adı"
         android:outlineProvider="background"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
 
-        android:hint="Şifre"
+        android:hint="@string/sirketSifre"
         app:endIconMode="password_toggle"
         app:layout_constraintBottom_toTopOf="@+id/textField2"
         app:layout_constraintEnd_toEndOf="@+id/textField1"
@@ -82,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:hint="E-mail"
+        android:hint="@string/sirketMail"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="@+id/textField"
         app:layout_constraintHorizontal_bias="0.0"
@@ -104,7 +104,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Kişiyi Ekle"
+        android:text="@string/sirketEkle"
         app:icon="@drawable/person_add"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Kişileri Listele"
+            android:text="@string/floatListe"
             app:layout_constraintBottom_toBottomOf="@+id/person_list"
             app:layout_constraintEnd_toStartOf="@+id/person_list"
             app:layout_constraintTop_toTopOf="@+id/person_list" />
@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Kişi Ekle"
+            android:text="@string/floatEkle"
             app:layout_constraintBottom_toBottomOf="@+id/add_person"
             app:layout_constraintEnd_toStartOf="@+id/add_person"
             app:layout_constraintTop_toTopOf="@+id/add_person" />

@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">SqlLiteUygulama</string>
+    <string name="app_name">Ön Muhasebe Veriler</string>
+    <string name="sirketKayit">Şirket Kayıt Formu</string>
+    <string name="sirketAdi">Şirket Adı</string>
+    <string name="sirketMail">Şirket Mail</string>
+    <string name="sirketEkle">Kayıt Oluştur</string>
+    <string name="sirketGuncelleme">Bilgi Güncelleme Formu</string>
+    <string name="sirketSifre">Şifre</string>
+    <string name="btnGuncelleme">Bilgileri Güncelle</string>
+    <string name="floatEkle">Şirket Ekle</string>
+    <string name="floatListe">Hesap Bilgileri</string>
+    <string name="sirketListeleme">Hesap Listesi</string>
 </resources>

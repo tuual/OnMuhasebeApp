@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class updateActivity extends AppCompatActivity {
 
     private ActivityUpdateBinding binding;
-    private String kadi,ksifre,kemail,etKadi,etSifre,etEmail,id;
+    private String sirketAdi,ksifre,kemail,etKadi,etSifre,etEmail,id;
     private ConnectionHelper dbHelper;
 
 
@@ -93,7 +93,7 @@ public class updateActivity extends AppCompatActivity {
             if (!emailValue.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailValue).matches()) {
                 if (!etEmail.isEmpty() && !etKadi.isEmpty() && !etSifre.isEmpty()) {
 
-                    String query = "UPDATE kullanicilar SET kullaniciAdi = '" + etKadi + "',sifre = '" + etSifre + "',email = '" + etEmail + "' WHERE ID = " + id;
+                    String query = "UPDATE tblUser SET sirketAdi = '" + etKadi + "',sifre = '" + etSifre + "',email = '" + etEmail + "' WHERE ID = " + id;
                     dbHelper.execSQL(query, getApplicationContext());
                     db.close();
                     Toast.makeText(this, "Güncelleme Başarılı", Toast.LENGTH_SHORT).show();
@@ -121,12 +121,12 @@ public class updateActivity extends AppCompatActivity {
 
     private void GelenVeriler(){
         Bundle bundle = getIntent().getExtras();
-        kadi = bundle.getString("kAdi");
+        sirketAdi = bundle.getString("sirketAdi");
         id = bundle.getString("id");
         ksifre = bundle.getString("kSifre");
         kemail = bundle.getString("kEmail");
 
-        binding.etkullaniciadi.setText(kadi);
+        binding.etkullaniciadi.setText(sirketAdi);
         binding.etsifre.setText(ksifre);
         binding.etemail.setText(kemail);
 

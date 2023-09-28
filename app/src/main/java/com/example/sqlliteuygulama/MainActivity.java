@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,13 +14,11 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.example.sqlliteuygulama.databinding.ActivityMainBinding;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     SimpleAdapter adapter;
     int sayac = 0;
-    private String kullaniciAdi,sifre,email,id;
+    private String sirketAdi,sifre,email,id;
     Boolean actionButtonVisible;
     private ImageView imageView;
 
@@ -100,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 List<Map<String, String>> veriler = listModel.getList();
                 id = veriler.get(i).get("ID");
-                kullaniciAdi = veriler.get(i).get("KullaniciAdi");
+                sirketAdi = veriler.get(i).get("sirketAdi");
                 sifre = veriler.get(i).get("Sifre");
                 email = veriler.get(i).get("Email");
 
@@ -117,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(getApplicationContext(), updateActivity.class);
-                        intent.putExtra("kAdi", kullaniciAdi);
+                        intent.putExtra("sirketAdi", sirketAdi);
                         intent.putExtra("id", id);
                         intent.putExtra("kSifre", sifre);
                         intent.putExtra("kEmail", email);
@@ -143,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         List<Map<String,String>> VeriListesi;
         listModel listModel = new listModel(getApplicationContext());
         VeriListesi = listModel.getList();
-        String[] Sutun={"KullaniciAdi","Sifre","Email"};
+        String[] Sutun={"sirketAdi","Sifre","Email"};
         int[] idler ={R.id.tvKullanici,R.id.tvSifre,R.id.tvEmail};
         adapter = new SimpleAdapter(MainActivity.this,VeriListesi,R.layout.listviewdesign,Sutun,idler);
         binding.listview1.setAdapter(adapter);
@@ -153,28 +150,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void VeriSilme(int position) {
+    private void VeriSilme(int  position) {
         List<Map<String, String>> veriler = listModel.getList();
         id = veriler.get(position).get("ID");
-        kullaniciAdi = veriler.get(position).get("KullaniciAdi");
+        sirketAdi = veriler.get(position).get("sirketAdi");
         sifre = veriler.get(position).get("Sifre");
         email = veriler.get(position).get("Email");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Veri Silme");
         builder.setMessage("Veriyi Silmek İstiyor musunuz ?");
-        builder.setNegativeButton("Hayır", null);
+        AlertDialog.Builder builder1 = builder.setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        id = null;
+                        sifre = null;
+                        sirketAdi = null;
+                        email = null;
+                    }
+                }
+        );
         builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                String query = "DELETE FROM kullanicilar WHERE ID=" + id;
+                String query = "DELETE FROM tblUser WHERE ID=" + id;
 
                 try {
                     dbHelper.execSQL(query, MainActivity.this);
                 } catch (SQLException e) {
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     throw new RuntimeException(e);
                 }
-
                 Toast.makeText(MainActivity.this, "Kayıt Silindi", Toast.LENGTH_SHORT).show();
                 VeriOkuma();
             }

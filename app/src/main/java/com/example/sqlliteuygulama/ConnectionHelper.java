@@ -18,9 +18,9 @@ public class ConnectionHelper extends SQLiteOpenHelper {
 
 
     public ConnectionHelper(Context context) {
-        super(context, "AndroidProje.db", null, 2);
-        ip = "192.168.2.208";
-        database = "AndroidProje";
+        super(context, "OnMuhasebe.db", null, 2);
+        ip = "213.254.137.231";
+        database = "OnMuhasebe";
         username = "biltekbilisim";
         password = "Bilisim20037816";
         port = "1433";
@@ -34,7 +34,7 @@ public class ConnectionHelper extends SQLiteOpenHelper {
             connectionUrl = "jdbc:jtds:sqlserver://" + ip + ":" + port + ";" + "databasename=" + database + ";user=" + username + ";password=" + password + ";";
             connection = DriverManager.getConnection(connectionUrl);
         } catch (Exception e) {
-            Toast.makeText(context, "HATA BAĞLANMILAMADI" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "HATA Bağlanılamadı" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -60,13 +60,13 @@ public class ConnectionHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        sqLiteDatabase.execSQL("CREATE TABLE kullanicilar (ID INTEGER PRIMARY KEY AUTOINCREMENT, KullaniciAdi TEXT, Sifre TEXT, Email TEXT);");
+        sqLiteDatabase.execSQL("CREATE TABLE tblUser (ID INTEGER PRIMARY KEY AUTOINCREMENT, sirketAdi TEXT, sifre TEXT, email TEXT);");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS kullanicilar");
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS tblUser");
         onCreate(sqLiteDatabase);
     }
 }

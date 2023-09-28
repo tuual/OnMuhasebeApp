@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/textColor"
-            android:text="Kullanıcı Listesi"/>
+            android:text="@string/sirketListeleme"/>
 
         <ImageView
             android:id="@+id/buttonID"
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Kişileri Listele"
+            android:text="@string/floatListe"
             app:layout_constraintBottom_toBottomOf="@+id/person_list"
             app:layout_constraintEnd_toStartOf="@+id/person_list"
             app:layout_constraintTop_toTopOf="@+id/person_list" />
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:text="Kişi Ekle"
+            android:text="@string/floatEkle"
             app:layout_constraintBottom_toBottomOf="@+id/add_person"
             app:layout_constraintEnd_toStartOf="@+id/add_person"
             app:layout_constraintTop_toTopOf="@+id/add_person" />

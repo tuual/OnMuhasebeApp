@@ -2,7 +2,6 @@ package com.example.sqlliteuygulama;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class listModel {
-    String kullaniciAdi, sifre, email,ID;
+    String sirketAdi, sifre, email,ID;
     String sorgu;
     Boolean tamamlandı = false;
     Connection conn;
@@ -35,18 +34,18 @@ public class listModel {
         data = new ArrayList<Map<String, String>>();
         try {
             conn = dbHelper.connection;
-            sorgu = "SELECT * FROM kullanicilar";
+            sorgu = "SELECT * FROM tblUser";
             Statement smt = conn.createStatement();
             rs = smt.executeQuery(sorgu);
             while (rs.next()) {
                 Map<String, String> tabloverisi = new HashMap<String, String>();
-                tabloverisi.put("ID", rs.getString("ID"));
-                tabloverisi.put("KullaniciAdi", rs.getString("kullaniciAdi"));
+                tabloverisi.put("sirketAdi", rs.getString("sirketAdi"));
                 tabloverisi.put("Sifre", rs.getString("sifre"));
                 tabloverisi.put("Email", rs.getString("Email"));
+                tabloverisi.put("ID", rs.getString("ID"));
 
                 ID = rs.getString("ID");
-                kullaniciAdi = rs.getString("kullaniciAdi");
+                sirketAdi = rs.getString("sirketAdi");
                 sifre = rs.getString("sifre");
                 email = rs.getString("Email");
 
@@ -70,12 +69,12 @@ public class listModel {
         this.ID = ID;
     }
 
-    public String getKullaniciAdi() {
-        return kullaniciAdi;
+    public String getSirketAdi() {
+        return sirketAdi;
     }
 
-    public void setKullaniciAdi(String kullaniciAdi) {
-        this.kullaniciAdi = kullaniciAdi;
+    public void setSirketAdi(String sirketAdi) {
+        this.sirketAdi = sirketAdi;
     }
 
     public String getSifre() {
