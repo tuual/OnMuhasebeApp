@@ -19,10 +19,10 @@ public class ConnectionHelper extends SQLiteOpenHelper {
 
     public ConnectionHelper(Context context) {
         super(context, "OnMuhasebe.db", null, 2);
-        ip = "213.254.137.231";
+        ip = "";
         database = "OnMuhasebe";
-        username = "biltekbilisim";
-        password = "Bilisim20037816";
+        username = "";
+        password = "";
         port = "1433";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
